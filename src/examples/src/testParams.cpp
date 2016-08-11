@@ -79,25 +79,25 @@ int main (int argc, char **argv)
   scene->setParams("BOUNCE", 0.0);
   scene->setParams("BOUNCE_vel", 0.0);
   scene->setParams("DENSITY", 5.0);
-  scene->setParams("STEP4", 110);
-  scene->setParams("DRAW", true);
-  scene->setParams("FRICTION_mu", 1.0);
-  scene->setParams("FRICTION_mu2", 0.0);
-  scene->setParams("MAX_CONTACTS", 64);
-  scene->setParams("PRINT_AABB", true);
-  scene->setParams("PRINT_COM", true);          
-  scene->setParams("PRINT_START_POS", true);     
-  scene->setParams("PRINT_END_POS", true);     
-  scene->setParams("PRINT_DELTA_POS", true);     
-  scene->setParams("PRINT_CHKR_RSLT", true);     
+  scene->setParams("DRAW", true);           //render the scene
+  scene->setParams("FRICTION_mu", 1.0);     //if you set this to 0 objects will be very slippery
+  scene->setParams("FRICTION_mu2", 0.0);    //changing this doesn't seem to do much
+  scene->setParams("MAX_CONTACTS", 64);     //maximum number of contact points per body
+  scene->setParams("PRINT_AABB", true);     //print the object's Bounding Box
+  scene->setParams("PRINT_COM", true);      //print the object's center of mass       
+  scene->setParams("PRINT_START_POS", true);//print an object's intial x,y,z center
+  scene->setParams("PRINT_END_POS", true);  //print an object's final x,y,z center
+  scene->setParams("PRINT_DELTA_POS", true);//print an object's delta x,y,z for its center 
+  scene->setParams("PRINT_CHKR_RSLT", true);//print the result of check1, check2 etc..  
   scene->setParams("SOFT_CFM", 0.01);
-  scene->setParams("STEP1", 5);               
+  scene->setParams("STEP1", 5);             //amount of simulation steps used in check #1       
   scene->setParams("STEP2", 14);
   scene->setParams("STEP3", 20);
   scene->setParams("STEP4", 110);
-  scene->setParams("THRESHOLD", 0.08);
-  scene->setParams("TIMESTEP", 0.05);
-  scene->setScale(1, 200);                       //set modelnames[1] (paper bowl) to be scaled down by factor of 200   
+  scene->setParams("THRESHOLD", 0.08);      //amount objects allowed to move while still being marked as in static equilibrium
+  scene->setParams("TIMESTEP", 0.05);       //controls how far each physics simulation step is taken
+  scene->setScale(1, 200);    //set modelnames[1] (paper bowl) to be scaled down by factor of 200   
+  scene->setCamera(-0.0559,  -8.2456, 6.0500, 89.0000, -25.0000, 0.0000 ); //set the camera position
 
   // API functions
   scene->setModels(modelnames, filenames);       //set all the models and get their data  

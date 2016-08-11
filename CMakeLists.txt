@@ -187,6 +187,11 @@ target_link_libraries(testParams sceneValidator GL GLU glut X11 pthread
    ${catkin_LIBRARIES}
  )
 
+add_executable(testImperial src/examples/src/testImperial.cpp)
+target_link_libraries(testImperial  sceneValidator GL GLU glut X11 pthread
+   ${catkin_LIBRARIES}
+ )
+
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(scene_validator_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})

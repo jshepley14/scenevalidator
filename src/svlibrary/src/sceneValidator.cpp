@@ -52,7 +52,7 @@
 using namespace std;
 
 
-/* variables 
+/* variables IMPORTANT
 
  ---  Variables that will affect time to validate scene ---
   DRAW (rendering an image significantly slows down computation time)
@@ -67,13 +67,24 @@ using namespace std;
   DENSITY
   FRICTION_mu
   GRAVITYz
-  SOFT_CFM                                          */
+  SOFT_CFM
+  
+   ---  Variables that affect physics accuracy  ---
+	BOUNCE
+  BOUNCE_vel
+  DENSITY
+  FRICTION_mu
+  GRAVITYz
+  SOFT_CFM
+  TIMESTEP
+  DEFAULT_SCALE
+  MAX_CONTACTS                                           */
 
 
 //Variables that can be set in setParams() or in custom constructor or in setScale()
 static double BOUNCE = 0.0;            //change the bounciness
 static double BOUNCE_vel = 0.0;        //change the bounciness speed
-static int    DEFAULT_SCALE = 100;     //The default value each .obj files data is scaled down by. Set scale in setScale
+static double DEFAULT_SCALE = 100;     //The default value each .obj files data is scaled down by. Set scale in setScale
 static double DENSITY = 5.0;           //The default is from ODE trimesh demo
 static bool   DRAW = false;            //used to switch on or off the drawing of the scene
 static double FRICTION_mu =  1.0;      //if you set this to 0 objects will be very slippery
@@ -98,7 +109,7 @@ static int    STEP2=14;                //amount of simulation steps used in chec
 static int    STEP3=20;                //amount of simulation steps used in check #3
 static int    STEP4=110;               //amount of simulation steps used in check #4
 static double THRESHOLD  = 0.08;       //amount objects allowed to move while still being marked as in static equilibrium
-static double TIMESTEP = 0.05;         //controls how far each step is taken
+static double TIMESTEP = 0.05;         //controls how far each physics simulation step is taken
 
 
 
@@ -278,9 +289,9 @@ static bool isValid(std::vector<string> modelnames){
 
 
 /* sets all the objects' data */
-void setObject (MyObject &object, int number, char* filename){
+void setObject (MyObject &object, double number, char* filename){
 
-  int SCALE = number; //set the scale, or else object will be too big or too small, can set the scale manually if you want in setScale()
+  double SCALE = number; //set the scale, or else object will be too big or too small, can set the scale manually if you want in setScale()
 
   //Load the file
   objLoader *objData = new objLoader();     //this objLoader code relies on objLoader.h and it's dependencies
